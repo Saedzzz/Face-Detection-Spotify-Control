@@ -5,7 +5,7 @@ from spotify_client import make_client
 from presence import PresenceTracker
 from media import MediaController
 
-SHOW_PREVIEW = True      # set False to run with no window
+SHOW_PREVIEW = True  # False = run with no window
 CAMERA_INDEX = 1
 
 
@@ -14,7 +14,7 @@ def main():
     presence = PresenceTracker(absent_after_s=2.0, present_after_s=0.5)
 
     face_det = mp.solutions.face_detection.FaceDetection(
-        model_selection=0,  # 0 = close range (within ~2 m), 1 = long range
+        model_selection=0,  # 0 = close range, 1 = long range
         min_detection_confidence=0.5,
     )
 

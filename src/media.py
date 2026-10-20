@@ -3,10 +3,6 @@ import threading
 
 
 class MediaController:
-    """
-    Pauses/resumes Spotify through the API (explicit commands, never a toggle).
-    Calls run in a background thread so the camera loop never freezes.
-    """
 
     def __init__(self, sp):
         self.sp = sp
@@ -35,7 +31,7 @@ class MediaController:
             self.device_id = pb["device"]["id"]
         if pb and pb.get("is_playing"):
             self.sp.pause_playback(device_id=self.device_id)
-            self.paused_by_app = True      # only set after the pause succeeded
+            self.paused_by_app = True
             print("[media] left -> paused")
         else:
             print("[media] left -> nothing was playing, nothing to do")
@@ -43,7 +39,7 @@ class MediaController:
     def _resume(self):
         if self.paused_by_app:
             self.sp.start_playback(device_id=self.device_id)
-            self.paused_by_app = False     # only cleared after the resume succeeded
+            self.paused_by_app = False
             print("[media] returned -> resumed")
         else:
             print("[media] returned -> we hadn't paused, leaving it alone")
